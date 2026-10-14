@@ -3,7 +3,18 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Bazar Sunrise Beachwear</title>
+<title>Bazar Sunrise Beachwear | Moda praia com preço de bazar</title>
+<meta name="description" content="Biquínis, maiôs, saídas e kids em peças únicas, com preço de bazar. Escolha, pague com Pix e receba em casa ou retire em São Paulo.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:site_name" content="Bazar Sunrise Beachwear">
+<meta property="og:title" content="Bazar Sunrise Beachwear | Moda praia com preço de bazar">
+<meta property="og:description" content="Peças únicas de moda praia com até 80% de desconto. Escolha, reserve e pague com Pix.">
+<meta property="og:url" content="https://nnyuny.github.io/BazarSB/">
+<meta property="og:image" content="https://nnyuny.github.io/BazarSB/og.jpg">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://nnyuny.github.io/BazarSB/og.jpg">
 <style>
 :root{--ink:#17323A;--teal:#0F6B73;--teal2:#0B545B;--gold:#A98443;--sand:#EFE6D6;--paper:#FDFCFA;--line:#E4DACA;--coral:#D9573B;--mute:#6B7B80;--ok:#2E7D5B}
 *{box-sizing:border-box;margin:0;padding:0}
@@ -97,6 +108,34 @@ label{display:block;font-size:13px;font-weight:600;margin:12px 0 4px}
 #zoom{position:fixed;inset:0;z-index:90;background:rgba(10,20,24,.92);display:none;align-items:center;justify-content:center;padding:14px}
 #zoom img{max-width:100%;max-height:92vh;object-fit:contain}
 #zoom button{position:absolute;top:12px;right:14px;color:#fff;font-size:30px;line-height:1}
+.tbl{width:100%;border-collapse:collapse;font-size:13.5px;margin:8px 0}
+.tbl th,.tbl td{border:1px solid var(--line);padding:8px 6px;text-align:center}
+.tbl th{background:var(--sand)}.tbl td:first-child,.tbl th:first-child{text-align:left;font-weight:700;background:var(--sand)}
+.acc{border-top:1px solid var(--line)}
+.acc>button{width:100%;display:flex;justify-content:space-between;align-items:center;padding:15px 2px;font-weight:700;font-size:15.5px;text-align:left}
+.acc>button span{font-size:20px;color:var(--gold);line-height:1}
+.acc>div{padding:0 2px 16px;font-size:14px;color:#2b4850}
+.acc p{margin:0 0 8px}
+.lnk{font-size:13px;color:var(--teal);font-weight:600;text-decoration:underline;padding:2px 0}
+
+.shr{position:absolute;right:8px;top:8px;width:34px;height:34px;border-radius:50%;background:rgba(255,255,255,.94);display:grid;place-items:center;box-shadow:0 2px 6px rgba(0,0,0,.2)}
+.shr svg{width:18px;height:18px}
+.ph{cursor:pointer}
+.nm{cursor:pointer}
+.pgrid{display:grid;grid-template-columns:1fr;gap:18px}
+@media(min-width:760px){.pgrid{grid-template-columns:1fr 1fr}}
+.pgrid .ph{cursor:zoom-in}
+.minis{display:flex;gap:12px;overflow-x:auto;padding:6px 0 10px;scrollbar-width:none}
+.mini{flex:none;width:132px;cursor:pointer}
+.mini img{width:132px;height:165px;object-fit:cover;border:1px solid var(--line);display:block}
+.mini b{display:block;font-size:13px;line-height:1.2;margin-top:5px}
+.mini span{font-size:13px;color:var(--teal);font-weight:700}
+.fbar{background:var(--sand);border-radius:10px;padding:10px 12px;margin:10px 0;font-size:13.5px}
+.fbar.ok{background:#E7F5EE;color:#1D5E43}
+.fbar i{display:block;height:7px;border-radius:99px;background:#fff;margin-top:7px;overflow:hidden}
+.fbar i u{display:block;height:100%;background:var(--teal);border-radius:99px;transition:width .3s}
+.fbar.ok i u{background:var(--ok)}
+.wa{display:flex;align-items:center;justify-content:center;gap:8px;background:#fff;border:1px solid #25A244;color:#1B7F34;font-weight:700;padding:12px;border-radius:10px;margin-top:10px;font-size:14.5px;width:100%}
 .banner{background:var(--sand);border-bottom:1px solid var(--line);padding:9px 14px;font-size:13.5px;text-align:center;cursor:pointer}
 .banner b{color:var(--teal)}
 </style>
@@ -144,7 +183,7 @@ const sdel=async(k,sh)=>{try{await tmo(window.storage.delete(k,!!sh))}catch(e){}
 const slist=async(p,sh)=>{try{const r=await tmo(window.storage.list(p,!!sh));return (r&&r.keys)||[]}catch(e){return[]}};
 
 /* ---------- estado ---------- */
-const DEF={whats:'',pixKey:'',pixName:'Bazar Sunrise',pixCity:'Sao Paulo',holdMin:30,orderMin:45,paidHours:24,freteGratis:0,pin:'1234'};
+const DEF={whats:'',pixKey:'',pixName:'Bazar Sunrise',pixCity:'Sao Paulo',holdMin:30,orderMin:45,paidHours:24,freteGratisQtd:3,freteGratisMin:0,pin:'1234'};
 const S={view:'shop',cat:'Todos',size:'Todos',sort:'rel',sel:{},bag:[],holds:{},sid:null,cfg:{...DEF},admin:false,tab:'pedidos',ofilter:'pend',orders:[],
  form:{nome:'',whats:'',cep:'',rua:'',num:'',comp:'',bairro:'',cidade:'',uf:''},fretes:[],freteSel:null,order:null,lastOrder:null,stock:'',demo:false,edit:null};
 const CATS=['Todos','Biquínis','Maiôs','Saídas e vestidos','Conjuntos','Kids'];
@@ -176,7 +215,7 @@ async function addBag(pid,size){
   const v=await readHolds();S.holds=v;
   if(v[k]&&v[k].sid===S.sid){
    if(!S.bag.find(b=>b.pid===pid&&b.size===size))S.bag.push({pid,size});
-   await sset('bag',S.bag,false);toast('Reservada por '+S.cfg.holdMin+' min. Finalize para garantir.');return render()}
+   await sset('bag',S.bag,false);const fi=freteInfo();toast(fi&&fi.ok?'Reservada. Frete grátis garantido!':fi&&fi.fq>0?'Reservada por '+S.cfg.holdMin+' min. Faltam '+fi.fq+' '+(fi.fq===1?'peça':'peças')+' para frete grátis.':'Reservada por '+S.cfg.holdMin+' min. Finalize para garantir.');return render()}
   if(v[k]&&v[k].sid!==S.sid){toast('Essa peça acabou de ser reservada por outra cliente.');return render()}
  }
  toast('Não foi possível reservar agora. Tente de novo.');render()
@@ -201,17 +240,35 @@ function zona(cep){
  if(n<=89999)return{r:'Paraná e Santa Catarina',pac:[29.9,'4 a 7'],sedex:[42.9,'2 a 4']};
  return{r:'Rio Grande do Sul',pac:[32.9,'5 a 8'],sedex:[46.9,'3 a 5']}
 }
-function calcFretes(cep){
- const z=zona(cep),n=S.bag.length,extra=Math.max(0,n-1)*3,sub=subtotal();
- const free=S.cfg.freteGratis>0&&sub>=S.cfg.freteGratis;
- return[{id:'pac',nome:'PAC (Correios)',prazo:z.pac[1]+' dias úteis',valor:free?0:+(z.pac[0]+extra).toFixed(2),reg:z.r},
-        {id:'sedex',nome:'SEDEX (Correios)',prazo:z.sedex[1]+' dias úteis',valor:+(z.sedex[0]+extra).toFixed(2),reg:z.r}]
+function freteInfo(){
+ const q=S.cfg.freteGratisQtd,min=S.cfg.freteGratisMin||0;if(!(q>0))return null;
+ const n=S.bag.length,sub=subtotal(),fq=Math.max(0,q-n),fv=Math.max(0,min-sub);
+ return{q,min,n,sub,fq,fv,ok:n>0&&fq===0&&fv===0}
 }
+function freteBar(){
+ const f=freteInfo();if(!f)return'';
+ const pct=Math.min(100,Math.round(Math.min(f.n/f.q,f.min>0?f.sub/f.min:1)*100));
+ let m;
+ if(f.ok)m='<b>Você ganhou frete grátis!</b> (PAC)';
+ else if(f.n===0)m=`<b>Frete grátis</b> (PAC) levando ${f.q} peças${f.min>0?' ou mais, em compras acima de '+brl(f.min):' ou mais'}`;
+ else if(f.fq>0)m=`Faltam <b>${f.fq} ${f.fq===1?'peça':'peças'}</b> para ganhar <b>frete grátis</b> (PAC)${f.min>0?' em compras acima de '+brl(f.min):''}`;
+ else m=`Faltam <b>${brl(f.fv)}</b> para ganhar <b>frete grátis</b> (PAC)`;
+ return `<div class="fbar ${f.ok?'ok':''}">${m}<i><u style="width:${pct}%"></u></i></div>`
+}
+function calcFretes(cep){
+ const z=zona(cep),n=S.bag.length,extra=Math.max(0,n-1)*3;
+ const fi=freteInfo(),free=!!(fi&&fi.ok);
+ return[{id:'pac',nome:'PAC (Correios)',correios:1,prazo:z.pac[1]+' dias úteis',valor:free?0:+(z.pac[0]+extra).toFixed(2),reg:z.r},
+        {id:'sedex',nome:'SEDEX (Correios)',correios:1,prazo:z.sedex[1]+' dias úteis',valor:+(z.sedex[0]+extra).toFixed(2),reg:z.r}]
+}
+const RETIRADA={id:'retirada',nome:'Retirar na loja (grátis)',prazo:'Disponível em até 8 dias · avisaremos por mensagem quando estiver pronta',valor:0,reg:'Rua Dr. Penaforte Mendes, 160 · Bela Vista · São Paulo/SP',retirada:true};
+const fretesList=()=>[...(S.form.cep.length===8?calcFretes(S.form.cep):[]),RETIRADA];
 const subtotal=()=>S.bag.reduce((a,b)=>a+P(b.pid).por,0);
 async function onCep(v){
  const c=v.replace(/\D/g,'').slice(0,8);S.form.cep=c;
- if(c.length<8){S.fretes=[];S.freteSel=null;return drawFrete()}
- S.fretes=calcFretes(c);S.freteSel=null;drawFrete();
+ if(S.freteSel!=='retirada')S.freteSel=null;
+ if(c.length<8){S.fretes=fretesList();return drawFrete()}
+ S.fretes=fretesList();drawFrete();
  try{const r=await fetch('https://viacep.com.br/ws/'+c+'/json/');const j=await r.json();
   if(!j.erro){Object.assign(S.form,{rua:j.logradouro||S.form.rua,bairro:j.bairro||S.form.bairro,cidade:j.localidade||'',uf:j.uf||''});
    ['rua','bairro','cidade','uf'].forEach(f=>{const el=$('#f_'+f);if(el)el.value=S.form[f]})}}catch(e){}
@@ -236,15 +293,16 @@ function copyText(t){
 async function createOrder(){
  const f=S.form,fr=S.fretes.find(x=>x.id===S.freteSel);
  if(!S.cfg.pixKey)return toast('O Pix da loja ainda não foi configurado.');
- if(!f.nome.trim()||f.whats.replace(/\D/g,'').length<10||f.cep.length<8||!f.rua.trim()||!f.num.trim()||!f.cidade.trim()||!f.uf.trim())return toast('Preencha nome, WhatsApp e endereço completo.');
- if(!fr)return toast('Escolha a forma de envio.');
+ if(!f.nome.trim()||f.whats.replace(/\D/g,'').length<10)return toast('Preencha seu nome e WhatsApp.');
+ if(!fr)return toast('Escolha a forma de envio ou retirada.');
+ if(!fr.retirada&&(f.cep.length<8||!f.rua.trim()||!f.num.trim()||!f.cidade.trim()||!f.uf.trim()))return toast('Preencha o endereço completo.');
  let h=await readHolds();
  for(const b of S.bag){const x=h[vkey(b.pid,b.size)];if(!x||x.sid!==S.sid||x.s!=='hold'){S.holds=h;toast('Uma peça da sua sacola não está mais reservada. Revise a sacola.');S.view='bag';return render()}}
  const id='SR'+Array.from(crypto.getRandomValues(new Uint8Array(8))).map(x=>(x%36).toString(36)).join('').toUpperCase();
  const exp=Date.now()+S.cfg.orderMin*60000;
  const items=S.bag.map(b=>({pid:b.pid,size:b.size,nome:P(b.pid).nome,preco:P(b.pid).por}));
  const sub=subtotal(),total=+(sub+fr.valor).toFixed(2);
- const order={id,sid:S.sid,createdAt:Date.now(),status:'aguardando',expiresAt:exp,items,cliente:{...f},frete:{nome:fr.nome,valor:fr.valor,prazo:fr.prazo},subtotal:sub,total};
+ const order={id,sid:S.sid,createdAt:Date.now(),status:'aguardando',expiresAt:exp,items,cliente:{...f},frete:{nome:fr.nome,valor:fr.valor,prazo:fr.prazo,retirada:!!fr.retirada},subtotal:sub,total};
  items.forEach(i=>{h[vkey(i.pid,i.size)]={s:'hold',sid:S.sid,until:exp,order:id}});
  await sset('holds',h,true);await sset('order:'+id,order,true);
  for(let n=0;n<3;n++){const ix=(await sget('orderidx',true))||[];if(ix.includes(id))break;ix.push(id);await sset('orderidx',ix,true);await new Promise(r=>setTimeout(r,120))}
@@ -279,7 +337,7 @@ async function loadOrders(){const ix=(await sget('orderidx',true))||[];const os=
 async function saveCfg(){
  const g=id=>$('#c_'+id).value;
  const c={whats:g('whats').replace(/\D/g,''),pixKey:g('pixKey').trim(),pixName:g('pixName').trim()||'Bazar Sunrise',pixCity:g('pixCity').trim()||'Sao Paulo',
-  holdMin:Math.max(5,+g('holdMin')||30),orderMin:Math.max(10,+g('orderMin')||45),paidHours:Math.max(1,+g('paidHours')||24),freteGratis:Math.max(0,+g('freteGratis')||0),pin:g('pin').trim()||'1234'};
+  holdMin:Math.max(5,+g('holdMin')||30),orderMin:Math.max(10,+g('orderMin')||45),paidHours:Math.max(1,+g('paidHours')||24),freteGratisQtd:(()=>{const q=parseInt(g('freteGratisQtd'));return isNaN(q)?3:Math.max(0,q)})(),freteGratisMin:Math.max(0,parseNum2(g('freteGratisMin'))),pin:g('pin').trim()||'1234'};
  S.cfg=c;await sset('config',c,true);toast('Configurações salvas.');render()
 }
 
@@ -351,7 +409,12 @@ function matchSize(p){
  return p.sizes.includes(S.size)
 }
 function availCount(p){return p.sizes.filter(s=>{const t=vstat(p.id,s);return t==='free'||t==='mine'}).length}
-function card(p){
+const SITE='https://nnyuny.github.io/BazarSB/';
+const shareUrl=id=>SITE+'#p'+id;
+function shareText(p){const av=p.sizes.filter(s=>{const x=vstat(p.id,s);return x==='free'||x==='mine'});
+ return 'Olha essa peça do Bazar Sunrise Beachwear: '+p.nome+' por '+brl(p.por)+(av.length?' (tam. '+av.join(', ')+')':'')+'. Peça única, pague com Pix!\n'+shareUrl(p.id)}
+const waShare=p=>'https://wa.me/?text='+encodeURIComponent(shareText(p));
+function pstate(p){
  const vs=p.sizes.map(s=>({s,st:vstat(p.id,s)}));
  const free=vs.filter(v=>v.st==='free'),mine=vs.filter(v=>v.st==='mine'),held=vs.filter(v=>v.st==='held');
  const gone=!free.length&&!mine.length&&!held.length;
@@ -367,12 +430,63 @@ function card(p){
  const total=free.length+mine.length;
  const tag=gone?'':(p.sizes.length>1&&total===1?'Última unidade':p.sizes.length===1?'Peça única':'1 unidade por tamanho');
  const disc=p.de?Math.round((1-p.por/p.de)*100):0;
- return `<div class="card ${gone?'gone':''}"><div class="ph" data-a="zoom" data-pid="${p.id}"><img loading="lazy" src="${IMGS[p.id]}" alt="${esc(p.nome)}" style="object-fit:${p.r>0.72&&p.r<0.9?'cover':'contain'}">
- ${disc>0?`<span class="badge">-${disc}%</span>`:''}${tag?`<span class="tag">${tag}</span>`:''}</div>
- <div class="meta">${p.marca?`<span class="mk">${esc(p.marca)}</span>`:''}<div class="nm">${esc(p.nome)}</div>
- <div class="pr">${p.de?`<s>${brl(p.de)}</s>`:''}<b>${brl(p.por)}</b></div>
- <div class="sizes">${chips}</div>${btn}</div></div>`
+ return{chips,btn,gone,tag,disc,total}
 }
+const SHR='<svg viewBox="0 0 24 24" fill="none" stroke="#17323A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 15V3M7 8l5-5 5 5"/><path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-7"/></svg>';
+function card(p){
+ const s=pstate(p);
+ return `<div class="card ${s.gone?'gone':''}"><div class="ph" data-a="open" data-pid="${p.id}"><img loading="lazy" src="${IMGS[p.id]}" alt="${esc(p.nome)}" style="object-fit:${p.r>0.72&&p.r<0.9?'cover':'contain'}">
+ ${s.disc>0?`<span class="badge">-${s.disc}%</span>`:''}${s.tag?`<span class="tag">${s.tag}</span>`:''}<button class="shr" data-a="share" data-pid="${p.id}" aria-label="Compartilhar no WhatsApp">${SHR}</button></div>
+ <div class="meta">${p.marca?`<span class="mk">${esc(p.marca)}</span>`:''}<div class="nm" data-a="open" data-pid="${p.id}">${esc(p.nome)}</div>
+ <div class="pr">${p.de?`<s>${brl(p.de)}</s>`:''}<b>${brl(p.por)}</b></div>
+ <div class="sizes">${s.chips}</div>${s.btn}</div></div>`
+}
+function sugestoes(p,max=6){
+ const want={'Biquínis':['Saídas e vestidos'],'Maiôs':['Saídas e vestidos'],'Saídas e vestidos':['Biquínis','Maiôs'],'Kids':['Kids']}[p.cat]||[];
+ let c=PRODUCTS.filter(x=>x.id!==p.id&&!x.hidden&&want.includes(x.cat)&&availCount(x)>0&&!S.bag.some(b=>b.pid===x.id));
+ if(!c.length)return[];
+ const off=p.id%c.length;c=c.slice(off).concat(c.slice(0,off));return c.slice(0,max)
+}
+const sugTitulo=p=>p.cat==='Saídas e vestidos'?'Combine com um biquíni ou maiô':p.cat==='Kids'?'Veja também':'Complete o look com uma saída';
+function minis(list){return `<div class="minis">${list.map(x=>`<div class="mini" data-a="open" data-pid="${x.id}"><img loading="lazy" src="${IMGS[x.id]}" alt=""><b>${esc(x.nome)}</b><span>${brl(x.por)}</span></div>`).join('')}</div>`}
+function prodView(){
+ const p=P(S.pid);if(!p)return`<div class="panel"><button class="back" data-a="home">‹ Voltar</button><p>Peça não encontrada.</p></div>`;
+ const s=pstate(p),sg=sugestoes(p),fi=freteInfo();
+ return `<div class="panel" style="max-width:920px"><button class="back" data-a="home">‹ Ver todas as peças</button>
+ <div class="pgrid"><div class="ph ${s.gone?'gone':''}" data-a="zoom" data-pid="${p.id}"><img src="${IMGS[p.id]}" alt="${esc(p.nome)}" style="object-fit:${p.r>0.72&&p.r<0.9?'cover':'contain'}">${s.disc>0?`<span class="badge">-${s.disc}%</span>`:''}${s.tag?`<span class="tag">${s.tag}</span>`:''}</div>
+ <div>${p.marca?`<span class="mk">${esc(p.marca)}</span>`:''}<h2 style="margin:2px 0 6px">${esc(p.nome)}</h2>
+ <div class="pr" style="margin-bottom:10px">${p.de?`<s>${brl(p.de)}</s>`:''}<b style="font-size:24px">${brl(p.por)}</b></div>
+ <p style="font-size:13px;color:var(--mute)">Tamanho</p><div class="sizes">${s.chips}</div>${s.btn}
+ <a class="wa" href="${waShare(p)}" target="_blank" rel="noopener">Compartilhar no WhatsApp</a>
+ <button class="btn sec" style="margin-top:8px" data-a="copylink" data-pid="${p.id}">Copiar link da peça</button>
+ ${fi?freteBar():''}
+ <div style="margin-top:10px;font-size:13.5px"><button class="lnk" data-a="info" data-v="medidas" data-go="1">Ver tabela de medidas</button> · <button class="lnk" data-a="info" data-v="trocas" data-go="1">Trocas</button></div></div></div>
+ ${sg.length?`<h3 class="serif" style="font-size:24px;margin:26px 0 4px">${sugTitulo(p)}</h3>${minis(sg)}`:''}</div>`
+}
+function lookSugs(){
+ for(const b of S.bag){const p=P(b.pid);if(!p)continue;
+  const wantCats={'Biquínis':['Saídas e vestidos'],'Maiôs':['Saídas e vestidos'],'Saídas e vestidos':['Biquínis','Maiôs']}[p.cat];
+  if(!wantCats)continue;
+  if(S.bag.some(x=>P(x.pid)&&wantCats.includes(P(x.pid).cat)))continue;
+  const s=sugestoes(p);if(s.length)return{p,list:s}}
+ return null
+}
+S.acc={};
+const INFO=[
+ ['medidas','Tabela de medidas',()=>`<table class="tbl"><tr><th></th><th>P</th><th>M</th><th>G</th><th>GG</th></tr>
+  <tr><td>Manequim</td><td>36/38</td><td>38/40</td><td>40/42</td><td>42/44</td></tr>
+  <tr><td>Busto</td><td>40 - 42</td><td>42 - 44</td><td>44 - 46</td><td>46 - 48</td></tr>
+  <tr><td>Cintura (cm)</td><td>60 - 69</td><td>70 - 79</td><td>80 - 89</td><td>90 - 99</td></tr>
+  <tr><td>Quadril (cm)</td><td>85 - 95</td><td>96 - 106</td><td>107 - 117</td><td>118 - 128</td></tr></table>
+  <p style="font-size:13px;color:var(--mute)">Antes de tirar as medidas, fique em pé, em posição ereta, com os braços ao lado do corpo, pés unidos e abdômen relaxado.</p>
+  <p style="font-size:13px;color:var(--mute)">A tabela vale para os tamanhos P ao GG. Para numeração (42 ao 50) e tamanhos infantis, fale com a loja.</p>`],
+ ['trocas','Trocas',()=>`<p>Você pode trocar a peça <b>em até 7 dias após o recebimento</b>, desde que ela esteja com todas as etiquetas e sem sinais de uso.</p>
+  <p>O frete da troca fica por conta da cliente, pois esse valor é pago diretamente aos Correios.</p>
+  <p>Para pedir a troca, fale com a loja pelo WhatsApp informando o número do pedido.</p>`],
+ ['entrega','Entrega e retirada',()=>`<p>Todos os pedidos são preparados e despachados <b>em até 8 dias</b>. O prazo dos Correios começa a contar a partir do envio.</p>
+  <p><b>Retirada na loja (grátis):</b> Rua Dr. Penaforte Mendes, 160 - Bela Vista - SP. Sua peça fica disponível em até 8 dias e avisamos por mensagem quando estiver pronta.</p>`]
+];
+function infoSections(){return INFO.map(([k,t,f])=>`<div class="acc" id="sec_${k}"><button data-a="acc" data-v="${k}">${t}<span>${S.acc[k]?'−':'+'}</span></button>${S.acc[k]?`<div>${f()}</div>`:''}</div>`).join('')+'<div class="acc"></div>'}
 function shop(){
  let list=PRODUCTS.filter(p=>!p.hidden&&(S.cat==='Todos'||p.cat===S.cat)&&matchSize(p));
  const disc=p=>p.de?1-p.por/p.de:0;
@@ -381,13 +495,15 @@ function shop(){
  if(S.sort==='maior')list=[...list].sort((a,b)=>b.por-a.por);
  if(S.sort==='desc')list=[...list].sort((a,b)=>disc(b)-disc(a));
  const avail=PRODUCTS.filter(p=>!p.hidden&&availCount(p)>0).length;
- return `<div class="strip">Promoção por tempo limitado · Pix · Envio para todo o Brasil</div>
+ return `<div class="strip">Promoção por tempo limitado · Pix · ${S.cfg.freteGratisQtd>0?'Frete grátis a partir de '+S.cfg.freteGratisQtd+' peças':'Envio para todo o Brasil'}</div>
  <div class="wrap"><div class="intro"><h1>Moda praia com preço de bazar</h1>
  <p>Cada peça tem poucas unidades: ao escolher, ela fica reservada para você enquanto finaliza o pagamento. ${avail} modelos disponíveis agora.</p></div>
+ <div style="display:flex;gap:14px;padding-top:8px"><button class="lnk" data-a="info" data-v="medidas">Tabela de medidas</button><button class="lnk" data-a="info" data-v="trocas">Trocas</button><button class="lnk" data-a="info" data-v="entrega">Entrega e retirada</button></div>
  <div class="filters">${CATS.map(c=>`<button class="pill ${S.cat===c?'on':''}" data-a="cat" data-v="${c}">${c}</button>`).join('')}</div>
  <div class="filters">${SIZES.map(c=>`<button class="pill ${S.size===c?'on':''}" data-a="fsize" data-v="${c}">${c==='Todos'?'Todos os tamanhos':c==='Numérico'?'42 ao 50':c}</button>`).join('')}</div>
  <div class="row2"><span>${list.length} ${list.length===1?'modelo':'modelos'}</span><select data-a="sort"><option value="rel" ${S.sort==='rel'?'selected':''}>Disponíveis primeiro</option><option value="menor" ${S.sort==='menor'?'selected':''}>Menor preço</option><option value="maior" ${S.sort==='maior'?'selected':''}>Maior preço</option><option value="desc" ${S.sort==='desc'?'selected':''}>Maior desconto</option></select></div>
  <div class="grid">${list.length?list.map(card).join(''):'<p style="grid-column:1/-1;padding:30px 0;color:var(--mute)">Nenhuma peça nesse filtro. Tente outro tamanho ou categoria.</p>'}</div>
+ <div style="margin-top:6px">${infoSections()}</div>
  <div class="foot">Pagamento por Pix. A loja confirma o pagamento e envia o código de rastreio pelo WhatsApp.<br><button data-a="adminLogin">Área da loja</button></div></div>
  ${S.bag.length?`<div class="fab"><button data-a="bag"><span>Ver sacola (${S.bag.length})</span><span>${brl(subtotal())}</span></button></div>`:''}`
 }
@@ -399,8 +515,8 @@ function bagView(){
   <button class="x" data-a="rm" data-pid="${b.pid}" data-size="${esc(b.size)}">Remover</button></div></div>`}).join('');
  const ok=S.bag.length&&S.bag.every(b=>vstat(b.pid,b.size)==='mine');
  return `<div class="panel"><button class="back" data-a="home">‹ Continuar escolhendo</button><h2>Sua sacola</h2>
- ${S.bag.length?`${u?`<div class="info">Reserva termina em <b class="cd" data-until="${u}">${mmss(u-Date.now())}</b>. Depois disso, as peças voltam para a loja.</div>`:''}${rows}
- <div class="sum tot"><span>Subtotal</span><span>${brl(subtotal())}</span></div><p style="font-size:13px;color:var(--mute)">O frete é calculado na próxima etapa.</p>
+ ${S.bag.length?`${freteBar()}${u?`<div class="info">Reserva termina em <b class="cd" data-until="${u}">${mmss(u-Date.now())}</b>. Depois disso, as peças voltam para a loja.</div>`:''}${rows}
+ <div class="sum tot"><span>Subtotal</span><span>${brl(subtotal())}</span></div><p style="font-size:13px;color:var(--mute)">O frete é calculado na próxima etapa.</p>${(()=>{const l=lookSugs();return l?`<h3 class="serif" style="font-size:22px;margin:18px 0 2px">Complete o look</h3>${minis(l.list)}`:''})()}
  <button class="btn" data-a="checkout" ${ok?'':'disabled'}>Finalizar compra</button>`
  :`<p style="color:var(--mute);margin:14px 0">Sua sacola está vazia.</p><button class="btn" data-a="home">Ver peças</button>`}</div>`
 }
@@ -409,17 +525,19 @@ function checkoutView(){
  return `<div class="panel"><button class="back" data-a="bag">‹ Voltar à sacola</button><h2>Entrega e pagamento</h2>
  <div class="info">Reserva termina em <b class="cd" data-until="${myHoldUntil()}">${mmss(myHoldUntil()-Date.now())}</b></div>
  ${inp('nome','Nome completo','Seu nome')}${inp('whats','WhatsApp (com DDD)','(11) 99999-9999','inputmode="tel"')}
- <label>CEP</label><input class="in" id="f_cep" data-f="cep" value="${esc(f.cep)}" placeholder="00000-000" inputmode="numeric" maxlength="9">
- <div class="two"><div>${inp('rua','Rua','')}</div><div>${inp('num','Número','','inputmode="numeric"')}</div></div>
+ <label>CEP (para calcular o frete)</label><input class="in" id="f_cep" data-f="cep" value="${esc(f.cep)}" placeholder="00000-000" inputmode="numeric" maxlength="9">
+ <div id="addr"><div class="two"><div>${inp('rua','Rua','')}</div><div>${inp('num','Número','','inputmode="numeric"')}</div></div>
  ${inp('comp','Complemento (opcional)','Apto, bloco...')}${inp('bairro','Bairro','')}
- <div class="two"><div>${inp('cidade','Cidade','')}</div><div>${inp('uf','UF','SP','maxlength="2"')}</div></div>
- <label>Envio (origem: São Paulo, CEP 01308-010)</label><div id="frete"></div>
+ <div class="two"><div>${inp('cidade','Cidade','')}</div><div>${inp('uf','UF','SP','maxlength="2"')}</div></div></div>
+ ${freteBar()}<label>Envio ou retirada</label><div class="info">Seu pedido é preparado e despachado <b>em até 8 dias</b>. O prazo dos Correios começa a contar a partir do envio.</div><div id="frete"></div>
  <div id="resumo"></div>
  <button class="btn" data-a="pay">Gerar Pix</button></div>`
 }
 function drawFrete(){
  const el=$('#frete');if(!el)return;
- el.innerHTML=S.fretes.length?S.fretes.map(x=>`<div class="opt ${S.freteSel===x.id?'on':''}" data-a="fsel" data-id="${x.id}"><div><b>${x.nome}</b><small>${x.prazo} · ${x.reg}</small></div><b>${x.valor===0?'Grátis':brl(x.valor)}</b></div>`).join('')+'<p style="font-size:12px;color:var(--mute);margin-top:6px">Valor estimado por região. A loja confirma o valor final antes do envio.</p>':'<p style="font-size:13px;color:var(--mute)">Digite o CEP para ver as opções de frete.</p>';
+ const hasC=S.fretes.some(x=>x.correios);
+ el.innerHTML=(hasC?'':'<p style="font-size:13px;color:var(--mute)">Digite o CEP para ver as opções de envio pelos Correios.</p>')+S.fretes.map(x=>`<div class="opt ${S.freteSel===x.id?'on':''}" data-a="fsel" data-id="${x.id}"><div><b>${x.nome}</b><small>${x.prazo}${x.correios?' a partir do envio':''} · ${x.reg}</small></div><b>${x.valor===0?'Grátis':brl(x.valor)}</b></div>`).join('')+(hasC?'<p style="font-size:12px;color:var(--mute);margin-top:6px">Valor estimado por região. A loja confirma o valor final antes do envio.</p>':'');
+ const ad=$('#addr');if(ad)ad.style.display=S.freteSel==='retirada'?'none':'block';
  const fr=S.fretes.find(x=>x.id===S.freteSel),sub=subtotal();
  const r=$('#resumo');if(r)r.innerHTML=`<div style="margin-top:14px"><div class="sum"><span>Subtotal (${S.bag.length} ${S.bag.length===1?'peça':'peças'})</span><span>${brl(sub)}</span></div><div class="sum"><span>Frete</span><span>${fr?(fr.valor===0?'Grátis':brl(fr.valor)):'—'}</span></div><div class="sum tot"><span>Total</span><span>${brl(sub+(fr?fr.valor:0))}</span></div></div>`
 }
@@ -428,7 +546,8 @@ function pixView(){
  const ex=expired(o),stt=ex?'expirado':o.status;
  const wa=S.cfg.whats?`https://wa.me/55${S.cfg.whats.replace(/^55/,'')}?text=${encodeURIComponent('Olá! Fiz o Pix do pedido '+o.id+' (valor '+brl(o.total)+'). Segue o comprovante.')}`:'';
  let body='';
- if(stt==='confirmado')body=`<div class="ok"><b>Pagamento confirmado.</b> Obrigada pela compra! Você receberá o código de rastreio no WhatsApp ${esc(o.cliente.whats)}.</div>`;
+ const ret=o.frete&&o.frete.retirada;
+ if(stt==='confirmado')body=`<div class="ok"><b>Pagamento confirmado.</b> Obrigada pela compra! ${ret?'Sua peça estará disponível para retirada em até 8 dias, e avisaremos pelo WhatsApp '+esc(o.cliente.whats)+' quando estiver pronta.':'Seu pedido será enviado em até 8 dias e o prazo dos Correios conta a partir do envio. Você receberá o código de rastreio no WhatsApp '+esc(o.cliente.whats)+'.'}</div>`;
  else if(stt==='liberado'||stt==='expirado')body=`<div class="warn"><b>Este pedido foi encerrado</b> e as peças voltaram ao estoque. Se você já pagou, fale com a loja${wa?'':''}.</div>${wa?`<a class="btn" href="${wa}" target="_blank" rel="noopener">Falar com a loja</a>`:''}<button class="btn sec" data-a="home">Voltar ao catálogo</button>`;
  else{
   const code=pixPayload(S.cfg.pixKey,S.cfg.pixName,S.cfg.pixCity,o.total,o.id);
@@ -442,7 +561,7 @@ function pixView(){
  const items=o.items.map(i=>`<div class="sum"><span>${esc(i.nome)} (${esc(i.size)})</span><span>${brl(i.preco)}</span></div>`).join('');
  return `<div class="panel"><button class="back" data-a="home">‹ Catálogo</button><h2>Pedido ${esc(o.id)} <span class="st ${stt}">${stText[stt]}</span></h2>${body}
  <h3 style="margin-top:22px;font-size:15px">Resumo</h3>${items}<div class="sum"><span>Frete ${esc(o.frete.nome)}</span><span>${o.frete.valor===0?'Grátis':brl(o.frete.valor)}</span></div>
- <p style="font-size:13px;color:var(--mute);margin-top:8px">Entrega para ${esc(o.cliente.nome)} · ${esc(o.cliente.rua)}, ${esc(o.cliente.num)} · ${esc(o.cliente.cidade)}/${esc(o.cliente.uf)}</p></div>`
+ <p style="font-size:13px;color:var(--mute);margin-top:8px">${ret?'Retirada na loja: Rua Dr. Penaforte Mendes, 160 - Bela Vista - SP. Disponível em até 8 dias; avisaremos por mensagem quando estiver pronta.':'Entrega para '+esc(o.cliente.nome)+' · '+esc(o.cliente.rua)+', '+esc(o.cliente.num)+' · '+esc(o.cliente.cidade)+'/'+esc(o.cliente.uf)+'. Envio em até 8 dias; o prazo dos Correios conta a partir do envio.'}</p></div>`
 }
 function drawQR(){
  const b=$('#qrbox');if(!b||!S.order)return;
@@ -467,7 +586,7 @@ function adminView(){
    <p><b>${esc(c.nome)}</b> · <a href="${wa}" target="_blank" rel="noopener">${esc(c.whats)}</a></p>
    <p>${o.items.map(i=>esc(i.nome)+' ('+esc(i.size)+') '+brl(i.preco)).join('<br>')}</p>
    <p>Frete: ${esc(o.frete.nome)} ${brl(o.frete.valor)}</p>
-   <p style="color:var(--mute)">${esc(c.rua)}, ${esc(c.num)}${c.comp?' - '+esc(c.comp):''} · ${esc(c.bairro)} · ${esc(c.cidade)}/${esc(c.uf)} · CEP ${esc(c.cep)}</p>
+   <p style="color:var(--mute)">${o.frete.retirada?'<b>RETIRADA NA LOJA</b> (avisar a cliente quando estiver pronta)':esc(c.rua)+', '+esc(c.num)+(c.comp?' - '+esc(c.comp):'')+' · '+esc(c.bairro)+' · '+esc(c.cidade)+'/'+esc(c.uf)+' · CEP '+esc(c.cep)}</p>
    <div>${stt==='confirmado'?`<button class="btn red sm" data-a="ord" data-id="${o.id}" data-v="release">Cancelar e devolver ao estoque</button>`:
      stt==='liberado'||stt==='expirado'?`<small style="color:var(--mute)">Peças já estão disponíveis no catálogo.</small>`:
      `<button class="btn sm" data-a="ord" data-id="${o.id}" data-v="confirm">Confirmar pagamento</button><button class="btn red sm" data-a="ord" data-id="${o.id}" data-v="release">Devolver ao estoque</button>`}</div></div>`}).join(''):'<p style="color:var(--mute);padding:14px 0">Nenhum pedido por aqui.</p>');
@@ -488,7 +607,7 @@ function adminView(){
   ${f('whats','WhatsApp da loja (com DDD)',c.whats,'Aparece na tela do Pix para a cliente enviar o comprovante')}
   ${f('holdMin','Minutos de reserva na sacola',c.holdMin)}${f('orderMin','Minutos para pagar o Pix',c.orderMin,'Se você não confirmar e o prazo acabar, a peça volta sozinha')}
   ${f('paidHours','Horas de reserva após "Já fiz o Pix"',c.paidHours,'Tempo que você tem para conferir o pagamento')}
-  ${f('freteGratis','Frete PAC grátis acima de (R$, 0 = desligado)',c.freteGratis)}${f('pin','PIN da área da loja',c.pin)}
+  ${f('freteGratisQtd','Frete PAC grátis a partir de quantas peças (0 = desligado)',c.freteGratisQtd,'Padrão: 3 peças. O frete grátis vale só para o PAC; o SEDEX continua pago pela cliente.')}${f('freteGratisMin','Valor mínimo da compra para o frete grátis (R$, 0 = sem mínimo)',c.freteGratisMin,'Use se o PAC de 3 peças baratas pesar no seu bolso. Ex.: 200')}${f('pin','PIN da área da loja',c.pin)}
   <button class="btn" data-a="savecfg">Salvar configurações</button>`}
  return `<div class="panel" style="max-width:760px"><button class="back" data-a="home">‹ Catálogo</button><h2>Área da loja</h2>${tabs}${body}<button class="btn sec" data-a="adminExit">Sair</button></div>`
 }
@@ -497,14 +616,18 @@ function adminView(){
 function render(){
  const y=window.scrollY,fo=document.activeElement&&document.activeElement.id;
  let v='';
- if(S.view==='shop')v=shop();else if(S.view==='bag')v=bagView();else if(S.view==='checkout')v=checkoutView();else if(S.view==='pix')v=pixView();else if(S.view==='admin')v=adminView();
+ if(S.view==='shop')v=shop();else if(S.view==='bag')v=bagView();else if(S.view==='checkout')v=checkoutView();else if(S.view==='pix')v=pixView();else if(S.view==='admin')v=adminView();else if(S.view==='prod')v=prodView();
  $('#app').innerHTML=header()+banner()+v;
  if(S.view==='checkout')drawFrete();
  if(S.view==='pix')drawQR();
  window.scrollTo(0,S.view==='shop'||S.view==='admin'?y:0);
  if(S.view==='admin'&&fo==='stk'){const el=$('#stk');if(el){el.focus();el.setSelectionRange(el.value.length,el.value.length)}}
 }
-function go(v){S.view=v;render();window.scrollTo(0,0)}
+function go(v){S.view=v;if(v!=='prod'&&location.hash){try{history.replaceState(null,'',location.pathname+location.search)}catch(e){}}render();window.scrollTo(0,0)}
+function openProd(id){try{history.pushState(null,'','#p'+id)}catch(e){}S.pid=id;S.view='prod';render();window.scrollTo(0,0)}
+function routeFromHash(){const m=(location.hash||'').match(/^#p(\d+)$/);if(m&&P(+m[1])&&!P(+m[1]).hidden){S.pid=+m[1];S.view='prod'}else if(S.view==='prod')S.view='shop'}
+window.addEventListener('hashchange',()=>{routeFromHash();render();window.scrollTo(0,0)});
+function copyLink(id){const u=shareUrl(id);if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(u).then(()=>toast('Link copiado.')).catch(()=>toast(u));else toast(u)}
 
 /* ---------- eventos ---------- */
 const A={
@@ -514,7 +637,7 @@ const A={
  add:d=>{const p=P(+d.pid);let s=S.sel[p.id];if(!s){const f=p.sizes.filter(x=>vstat(p.id,x)==='free');if(f.length===1)s=f[0]}if(s)addBag(p.id,s)},
  readd:d=>addBag(+d.pid,d.size),rm:d=>removeBag(+d.pid,d.size),
  zoom:d=>{const z=$('#zoom');z.querySelector('img').src=IMGS[+d.pid];z.style.display='flex'},zoomx:()=>{$('#zoom').style.display='none'},
- checkout:()=>{if(!S.bag.length)return;S.fretes=S.form.cep.length===8?calcFretes(S.form.cep):[];S.freteSel=null;go('checkout')},
+ checkout:()=>{if(!S.bag.length)return;S.fretes=fretesList();S.freteSel=null;go('checkout')},
  fsel:d=>{S.freteSel=d.id;drawFrete()},
  pay:()=>createOrder(),copy:d=>copyText(d.code),paid:()=>informPaid(),
  openOrder:()=>go('pix'),
@@ -522,6 +645,8 @@ const A={
  adminEnter:async()=>{const v=($('#pin')||{}).value;if(v===S.cfg.pin){S.admin=true;await loadOrders();render()}else toast('PIN incorreto.')},
  adminExit:()=>{S.admin=false;go('shop')},
  tab:async d=>{S.tab=d.v;if(d.v==='pedidos')await loadOrders();render()},of:d=>{S.ofilter=d.v;render()},
+ acc:d=>{S.acc[d.v]=!S.acc[d.v];render()},info:d=>{S.acc[d.v]=true;if(S.view!=='shop')go('shop');else render();setTimeout(()=>{const e=$('#sec_'+d.v);if(e)e.scrollIntoView({behavior:'smooth',block:'start'})},30)},
+ open:d=>openProd(+d.pid),share:d=>{window.open(waShare(P(+d.pid)),'_blank')},copylink:d=>copyLink(+d.pid),
  newp:()=>{S.edit={id:null,img:null};render()},editp:d=>{S.edit={id:+d.pid,img:null};render()},editx:()=>{S.edit=null;render()},savep:()=>saveEdit(),delp:()=>deleteExtra(),
  ord:d=>adminSet(d.id,d.v),stk:d=>adminStock(+d.pid,d.size,d.v),savecfg:()=>saveCfg()
 };
@@ -551,12 +676,12 @@ setInterval(refresh,12000);
 window.addEventListener('error',e=>{const a=$('#app');if(a&&!a.innerHTML.trim())a.innerHTML='<div style="padding:24px"><b>Não foi possível carregar o catálogo.</b><br><small>'+esc(e.message)+'</small></div>'});
 (async function init(){
  S.sid='tmp'+Math.random().toString(36).slice(2,8);
- render();
+ routeFromHash();render();
  try{await tmo(window.storage.set('probe','1',true));await tmo(window.storage.set('probe','1',false))}catch(e){window.storage=makeMem();S.demo=true;render()}
  let sid=await sget('sid',false);if(!sid){sid='c'+Math.random().toString(36).slice(2,10)+Date.now().toString(36);await sset('sid',sid,false)}
  S.sid=sid;
  const c=await sget('config',true);if(c)S.cfg={...DEF,...c};
- CAT=normCat(await sget('catalog',true));await loadCatImgs();applyCatalog();
+ CAT=normCat(await sget('catalog',true));await loadCatImgs();applyCatalog();routeFromHash();
  S.bag=(await sget('bag',false))||[];
  S.bag=S.bag.filter(b=>P(b.pid)&&P(b.pid).sizes.includes(b.size));
  await loadHolds();
